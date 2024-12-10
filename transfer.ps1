@@ -1,8 +1,8 @@
 $oldComputer = Read-Host -Prompt 'Enter the old computer name: '
 $newComputer = Read-Host -Prompt 'Enter the new computer name: '
 $username = Read-Host -Prompt 'Enter the username: '
-$oldSourcePath = "\\$oldComputer\Users\$username" 
-$newSourcePath = "\\$newComputer\Users\$username"
+$oldSourcePath = "\\$oldComputer\c$\Users\$username" 
+$newSourcePath = "\\$newComputer\c$\Users\$username"
 
 
 # Check if the source directories exist. If not, exit the script. If the new computer directory does not exist, prompt the user to create it.
@@ -25,12 +25,23 @@ Write-Host "the source path ($oldSourcePath) to the destination path ($newSource
 Read-Host
 
 # Copy the specified folders from the old computer to the new computer
+Write-Host "Copying Desktop..."
 Copy-Item -Path "$oldSourcePath\Desktop" -Destination "$newSourcePath\Desktop" -Recurse -Force
+Write-Host "Desktop copied successfully."
+Write-Host "Copying Documents..."
 Copy-Item -Path "$oldSourcePath\Documents" -Destination "$newSourcePath\Documents" -Recurse -Force
+Write-Host "Documents copied successfully."
+Write-Host "Copying Downloads..."
 Copy-Item -Path "$oldSourcePath\Downloads" -Destination "$newSourcePath\Downloads" -Recurse -Force
+Write-Host "Downloads copied successfully."
+Write-Host "Copying Pictures..."
 Copy-Item -Path "$oldSourcePath\Pictures" -Destination "$newSourcePath\Pictures" -Recurse -Force
+Write-Host "Pictures copied successfully."
+Write-Host "Copying Videos..."
 Copy-Item -Path "$oldSourcePath\Videos" -Destination "$newSourcePath\Videos" -Recurse -Force
+Write-Host "Videos copied successfully."
+
 
 Write-Host "User files from user $username have been successfully copied from $oldComputer ($oldSourcePath) to $newComputer ($newSourcePath)."
-Wrtite-Host "Transfer complete. Press Enter to exit."
+Write-Host "Transfer complete. Press Enter to exit."
 Read-Host
